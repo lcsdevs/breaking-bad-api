@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import SearchAppBar from "./components/app-bar/SearchAppBar";
 import Characters from "./components/characters";
+import {Container,Row,Col} from 'reactstrap';
 
 class App extends Component {
     state = {
@@ -17,7 +19,10 @@ class App extends Component {
 
     render() {
         return (
-            <Characters characters={this.state.characters} />
+            <>
+                <SearchAppBar/>
+                       <Col><Characters characters={this.state.characters} /></Col>
+                </>
         )
     }
 }
