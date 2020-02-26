@@ -1,32 +1,104 @@
 import React from 'react'
-import {
-    Card,  CardImg, CardTitle, CardText, CardDeck,
-    CardSubtitle, CardBody
-} from 'reactstrap';
+import {Box, Grid} from "@material-ui/core";
+import {makeStyles} from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CakeIcon from '@material-ui/icons/Cake';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import LocalHospitalOutlinedIcon from '@material-ui/icons/LocalHospitalOutlined';
+import { palette } from '@material-ui/system';
+import { shadows } from '@material-ui/system';
 
-import { Container, Row, Col } from 'reactstrap';
 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        minWidth: 420,
+        minheight:640,
+        marginRight: 'auto',
+        marginLeft:'auto',
+        marginBottom:'30px',
+        marginTop:'30px',
+        backgroundColor:"#323232"
+    },
+    media: {
+        height: 0,
+        width:280,
+        marginLeft:'auto',
+        marginRight: 'auto',
+        marginTop:'auto',
+        paddingTop: '99.25%',
+        paddingBottom: '30%',
+    },
+    title:{
+        marginLeft:'auto',
+        marginRight: 'auto',
+    },
+    alive: {
+        backgroundColor: "#038c1a"
+    },
+    presumed: {
+        backgroundColor: "#ff1100",
+    },
+    dead:{
+        backgroundColor :"#fc8c03"
+    },
+    unknown:{
+        backgroundColor: "#4f4f4f"
+    }
+
+}));
 
 const Characters = ({characters}) => {
+    const classes = useStyles();
+
+    function statusChar(status) {
+        if(status === 'Deceased'){
+            return classes.dead
+        }else if(status === "Alive"){
+            return  classes.alive
+        }else if(status === "Presumed dead"){
+            return  classes.presumed
+        }else{
+            return classes.unknown
+        }
+    }
+
+
     return (
-        <div>
-            <Container className="themed-container" fluid="xl">
-                <Row xs="6" sm="3">
-            {characters.map((character) => (
-                <CardDeck>
-                    <Card>
-                    <CardImg top width="300%" src={character.img} alt="Card image cap" />
-                    <CardBody>
-                        <CardTitle><b>Character</b>: {character.name}</CardTitle>
-                        <CardSubtitle><b>Birthday</b>: {character.birthday}</CardSubtitle>
-                        <CardText><b>Occupation</b>: {character.occupation+" "}</CardText>
-                    </CardBody>
-                    </Card>
-                </CardDeck>
-            ))}
-                </Row>
-            </Container>
-        </div>
+        <Box display="flex" flexDirection="row" boxShadow={3} item xl={3}>
+            <Grid container >
+                    {characters.map((character) => (
+                        <Card className={classes.root}>
+                            <CardHeader
+                                avatar={
+                                    <Avatar aria-label="recipe" className={statusChar(character.status)}>
+                                       <LocalHospitalOutlinedIcon/>
+                                    </Avatar>
+                                }
+                                title={
+                                    <Box color="#ffffff" className={classes.title}>{character.name}</Box>}
+                                subheader={
+                                    <Box color="#ffffff" className={classes.title}>{character.portrayed}</Box>}
+                            />
+                            <CardMedia
+                                className={classes.media}
+                                image={character.img}
+                                title={character.nickname}
+                            />
+                            <CardContent>
+                                <Typography variant="body2" component="p" >
+                                   <p><Box color="#ffffff" className={classes.title}><CakeIcon/>{character.birthday}</Box> </p>
+                                    <p> <Box color="#ffffff" className={classes.title}>{character.occupation+" "}</Box> </p>
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    ))}
+            </Grid>
+        </Box>
     )
 };
 
