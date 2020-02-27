@@ -2,7 +2,13 @@
 
 Projeto utilizando o React, para buscar personagens da série Breaking Bad.
 
+### `npm i`
+
+Para efetuar a instalação das dependências 
+
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Efetua a build em modo de desenvolvimento<br />
+
+###Iniciar
+Abrir [http://localhost:3000](http://localhost:3000) no Browser.

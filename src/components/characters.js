@@ -9,10 +9,6 @@ import CakeIcon from '@material-ui/icons/Cake';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import LocalHospitalOutlinedIcon from '@material-ui/icons/LocalHospitalOutlined';
-import { palette } from '@material-ui/system';
-import { shadows } from '@material-ui/system';
-
-
 
 const useStyles = makeStyles(theme => ({
     root: {
